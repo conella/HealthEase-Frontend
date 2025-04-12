@@ -3,10 +3,10 @@ name: Audit and Build
 on:
   push:
     branches:
-      - main
+      - '*'
   pull_request:
     branches:
-      - main
+      - '*'
 
 jobs:
   audit-and-build:
