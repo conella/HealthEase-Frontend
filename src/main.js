@@ -1,5 +1,27 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import "./assets/styles/globals.scss";
 
-createApp(App).mount('#app')
+// Vuetify
+import "vuetify/styles";
+import { createVuetify } from "vuetify";
+import * as components from "vuetify/components";
+import * as directives from "vuetify/directives";
+
+import { router } from "./router"; // Import the router configuration
+import { createPinia } from "pinia"; // Import Pinia
+
+import '@mdi/font/css/materialdesignicons.css'
+
+const app = createApp(App);
+
+// Initialize Pinia and use it
+const pinia = createPinia();
+app.use(pinia);
+const vuetify = createVuetify({
+  components,
+  directives,
+});
+app.use(router);
+app.use(vuetify);
+app.mount("#app");
