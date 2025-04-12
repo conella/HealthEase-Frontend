@@ -12,7 +12,6 @@ export const useUsersStore = defineStore("users", {
     async register(user) {
       try {
         const res = await api.post('/register', user); // POST to backend
-        console.log('Registered:', res.data.message);
         return res.data;
       } catch (error) {
         console.error('Registration error:', error.response?.data?.message || error.message);
@@ -32,9 +31,5 @@ export const useUsersStore = defineStore("users", {
         throw error.response?.data?.message || 'Login failed';  // Show proper error
       }
     },
-
-    logout() {
-      this.user = null;
-    }
   }
 });

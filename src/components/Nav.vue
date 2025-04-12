@@ -14,10 +14,6 @@ const isLoginPage = ref(false);
 watchEffect(() => {
     isRegisterPage.value = route.path === '/account/register';
     isLoginPage.value = route.path === '/account/login';
-
-    console.log('router', route.path)
-    console.log('register', isRegisterPage.value)
-    console.log('isLoginPage', isLoginPage.value)
 });
 
 </script>

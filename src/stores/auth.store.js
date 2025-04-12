@@ -1,9 +1,6 @@
 import { defineStore } from "pinia";
-
 import { router } from "@/router";
-import axios from 'axios';
-
-const baseUrl = `${import.meta.env.VITE_API_URL}`;
+import api from "@/services/api"; // using the axios instance
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -13,13 +10,12 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login(username, password) {
       try {
-        // Make a POST request to the backend login endpoint
-        const response = await axios.post(`${baseUrl}/login`, {
+        // Using the custom axios instance with credentials
+        const response = await api.post("/login", {
           username,
           password,
         });
 
-        // Store the authenticated user in the store
         this.user = response.data.user;
 
         // Redirect based on user role
@@ -37,15 +33,30 @@ export const useAuthStore = defineStore("auth", {
             router.push("/");
         }
       } catch (error) {
-        // Handle login error (e.g., invalid username or password)
         console.error("Login failed:", error);
         throw new Error(error.response?.data?.message || "Login failed");
       }
     },
 
-    logout() {
-      this.user = null;
-      router.push("/login");
+    async logout() {
+      try {
+        await api.post("/logout");
+      } catch (err) {
+        console.error("Logout error:", err);
+      } finally {
+        this.user = null;
+        router.push("/account/login");
+      }
+    },
+
+    async checkAuth() {
+      try {
+        const response = await api.get("/me");
+        this.user = response.data;
+      } catch (error) {
+        console.warn("Not authenticated");
+        this.user = null;
+      }
     },
   },
 });

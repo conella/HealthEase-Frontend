@@ -11,6 +11,11 @@
                 <v-card class="pa-5" outlined>
                     <v-card-title class="headline">Login</v-card-title>
                     <v-card-text>
+                        <!-- Show error message here if login fails -->
+                        <v-alert v-if="errorMessage" type="error" dismissible>
+                            {{ errorMessage }}
+                        </v-alert>
+
                         <Form @submit="onSubmit" :validation-schema="validationSchema" v-slot="{ isSubmitting }">
                             <!-- Username Field -->
                             <Field name="username" v-slot="{ field, errorMessage }">
@@ -18,7 +23,7 @@
                                     :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
                             </Field>
 
-                            <!-- Password Field -->
+                            <!-- Password Field (No password validation here) -->
                             <Field name="password" v-slot="{ field, errorMessage }">
                                 <v-text-field v-bind="field" type="password" label="Password"
                                     :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
@@ -41,6 +46,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
 import * as Yup from 'yup'
 import { useAuthStore } from '@/stores'
@@ -49,10 +55,11 @@ import { router } from '@/router'
 // Validation schema
 const validationSchema = Yup.object().shape({
     username: Yup.string().required("Please enter your username."),
-    password: Yup.string()
-        .min(8, "Password must be at least 8 characters long.")
-        .required("Please enter your password."),
+    password: Yup.string().required("Please enter your password."),
 })
+
+// Reactive state for error message
+const errorMessage = ref('')
 
 // Submit handler
 async function onSubmit(values) {
@@ -66,11 +73,10 @@ async function onSubmit(values) {
         // Show success message and redirect
         console.log('Login successful:', user)
         router.push('/dashboard') // Redirect user based on role
-
-        // Optionally: Add success toast here
     } catch (error) {
         console.error("Login failed:", error)
-        // Optional: Show error toast
+        // Update the error message when login fails
+        errorMessage.value = "Invalid credentials. Please check your username and password."
     }
 }
 </script>

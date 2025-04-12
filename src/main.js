@@ -10,18 +10,27 @@ import * as directives from "vuetify/directives";
 
 import { router } from "./router"; // Import the router configuration
 import { createPinia } from "pinia"; // Import Pinia
+import { useAuthStore } from '@/stores';
 
 import '@mdi/font/css/materialdesignicons.css'
 
 const app = createApp(App);
 
-// Initialize Pinia and use it
+// Initialize Pinia
 const pinia = createPinia();
 app.use(pinia);
+
+const authStore = useAuthStore();
+
 const vuetify = createVuetify({
   components,
   directives,
 });
+
 app.use(router);
 app.use(vuetify);
-app.mount("#app");
+
+// Wait for auth before mounting
+authStore.checkAuth().finally(() => {
+  app.mount('#app');
+});
