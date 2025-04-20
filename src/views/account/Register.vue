@@ -44,7 +44,7 @@
                         </Form>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-center">
-                        <router-link to="/login" class="v-btn v-btn--text">
+                        <router-link to="/account/login" class="v-btn v-btn--text">
                             Already have an account? Login
                         </router-link>
                     </v-card-actions>
