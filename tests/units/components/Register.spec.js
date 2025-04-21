@@ -2,7 +2,6 @@ import { mount } from "@vue/test-utils";
 import { nextTick } from "vue";
 import flushPromises from "flush-promises";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import Register from "@/views/account/Register.vue";
 import { Layout, Login, Register } from "@/views/account";
 import { Home } from "@/views";
 import { createRouter, createMemoryHistory } from "vue-router";

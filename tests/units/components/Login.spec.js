@@ -4,7 +4,6 @@ import flushPromises from "flush-promises";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Layout, Login, Register } from "@/views/account";
 import { Home } from "@/views";
-import Login from "@/views/account/Login.vue";
 import { createRouter, createMemoryHistory } from "vue-router";
 import { router as mockedRouter } from "@/router";
 import { createTestingPinia } from "@pinia/testing";
