@@ -53,6 +53,7 @@ export const useAuthStore = defineStore("auth", {
       try {
         const response = await api.get("/me");
         this.user = response.data;
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         console.warn("Not authenticated");
         this.user = null;
