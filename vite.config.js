@@ -1,11 +1,12 @@
-import { fileURLToPath, URL } from 'url';
+import { fileURLToPath, URL } from "url";
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import ViteVuetify from 'vite-plugin-vuetify';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), ViteVuetify()],
   css: {
     preprocessorOptions: {
       scss: {
@@ -15,7 +16,21 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: './tests/setup/vuetify.js',
+    include: ["tests/**/*.spec.{js,ts}"], // Tells Vitest where to find the test files
+    transform: {
+      '\\.css$': 'vitest-plugin-mock-css', // Mock CSS for testing
+    },
+    server: {
+      deps: {
+        inline: ['vuetify']
+      }
     }
-}
-})
+  },
+});
