@@ -67,7 +67,7 @@
 <script setup>
 import { onMounted, watch, computed, ref } from "vue";
 import { useAppointmentsStore } from "@/stores/appointments.store";
-import { useAuthStore } from '@/stores'
+import { useAuthStore } from "@/stores"
 
 const store = useAppointmentsStore();
 const dialog = ref(false);
@@ -103,7 +103,7 @@ function formatTime(timeStr) {
   if (timeStr && timeStr.length >= 5) {
     return timeStr.slice(0, 5); // Trims to HH:mm
   }
-  return 'Invalid Time'; // Return a fallback if the time format is incorrect or missing
+  return "Invalid Time"; // Return a fallback if the time format is incorrect or missing
 }
 
 function statusColor(status) {
