@@ -18,20 +18,8 @@ export const useAuthStore = defineStore("auth", {
 
         this.user = response.data.user;
 
-        // Redirect based on user role
-        switch (this.user.role) {
-          case "admin":
-            router.push("/admin/portal");
-            break;
-          case "doctor":
-            router.push("/doctor/portal");
-            break;
-          case "patient":
-            router.push("/patient/portal");
-            break;
-          default:
-            router.push("/");
-        }
+        // Redirect to the dashboard page (generic dashboard)
+        router.push("/dashboard");
       } catch (error) {
         console.error("Login failed:", error);
         throw new Error(error.response?.data?.message || "Login failed");
@@ -51,13 +39,8 @@ export const useAuthStore = defineStore("auth", {
 
     async checkAuth() {
       try {
-        const res = await fetch("http://localhost:5000/me", {
-          credentials: "include",
-        });
-
-        if (!res.ok) throw new Error("Not authenticated");
-
-        this.user = await res.json();
+        const res = await api.get("/me");
+        this.user = res.data;
       } catch (err) {
         this.user = null;
       }

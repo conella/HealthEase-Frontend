@@ -8,6 +8,13 @@
         </p>
       </v-col>
 
+      <!-- Add Appointment Button -->
+      <v-col cols="12" class="text-center mb-4">
+        <v-btn color="primary" :to="{ name: 'book-appointment' }">
+          Add Appointment
+        </v-btn>
+      </v-col>
+
       <v-col cols="12" v-if="appointments.length === 0" class="text-center">
         <v-alert type="info">You have no appointments yet.</v-alert>
       </v-col>
@@ -16,18 +23,18 @@
         <v-card class="mb-4" outlined>
           <v-card-title class="d-flex justify-space-between align-center">
             <div>
-              <strong>{{ appointment.doctorName }}</strong> - {{ appointment.department }}
+              <strong>{{ appointment.doctorname }}</strong> - {{ appointment.department }}
             </div>
             <v-chip :color="statusColor(appointment.status)" dark>{{ appointment.status }}</v-chip>
           </v-card-title>
 
           <v-card-text>
-            <p><strong>Date:</strong> {{ formatDate(appointment.appointmentDate) }}</p>
-            <p><strong>Time:</strong> {{ formatTime(appointment.appointmentTime) }}</p>
+            <p><strong>Date:</strong> {{ formatDate(appointment.appointmentdate) }}</p>
+            <p><strong>Time:</strong> {{ formatTime(appointment.appointmenttime) }}</p>
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="error" @click="cancel(appointment.id)" :disabled="appointment.status !== 'booked'">
+            <v-btn color="error" @click="cancel(appointment.id)" :disabled="appointment.status === 'canceled'">
               Cancel
             </v-btn>
 
@@ -80,7 +87,6 @@ const authStore = useAuthStore()
 watch(
   () => authStore.user,
   (user) => {
-    console.log("👤 Auth user is now:", user);
     if (user) {
       store.fetchAppointments();
     }
@@ -104,7 +110,7 @@ function statusColor(status) {
   switch (status) {
     case "booked":
       return "green";
-    case "cancelled":
+    case "canceled":
       return "red";
     case "rescheduled":
       return "blue";
@@ -119,8 +125,8 @@ function cancel(id) {
 
 function openRescheduleDialog(appointment) {
   selectedAppointmentId.value = appointment.id;
-  newDate.value = appointment.appointmentDate.split("T")[0]; // for input[type="date"]
-  newTime.value = appointment.appointmentTime.slice(0, 5); // for input[type="time"]
+  newDate.value = appointment.appointmentdate.split("T")[0]; // for input[type="date"]
+  newTime.value = appointment.appointmenttime.slice(0, 5); // for input[type="time"]
   dialog.value = true;
 }
 
