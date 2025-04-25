@@ -4,10 +4,12 @@ import { useAuthStore, useAlertStore } from "@/stores";
 import { Home } from "@/views";
 import accountRoutes from "./account.routes";
 
-import PatientPortal from "@/views/users/PatientPortal.vue";
-import DoctorPortal from "@/views/users/DoctorPortal.vue";
-import AdminPortal from "@/views/users/AdminPortal.vue";
-import PatientAppointments from "@/views/users/PatientAppointments.vue"; // ✅ NEW
+import PatientDashboard from "@/views/users/PatientDashboard.vue";
+import DoctorDashboard from "@/views/users/DoctorDashboard.vue";
+import AdminDashboard from "@/views/users/AdminDashboard.vue";
+import PatientAppointments from "@/views/users/PatientAppointments.vue";
+import BookAppointment from "../views/users/BookAppointment.vue";
+import FindDoctors from "../views/users/FindDoctors.vue";
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,31 +17,38 @@ export const router = createRouter({
   routes: [
     { path: "/", component: Home },
     accountRoutes,
-
-    // ✅ Patient routes with nested structure
+    // Dashboard route
     {
-      path: "/patient/portal",
-      component: PatientPortal,
-      children: [
-        {
-          path: "appointments",
-          component: PatientAppointments,
-        },
-      ],
+      path: "/dashboard",
+      component: () => import('@/views/users/Dashboard.vue'), // Common parent component
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.user) {
+          next(); // Allow access if user is logged in
+        } else {
+          next("/"); // Redirect to home if not logged in
+          useAlertStore().error("You must be logged in to view the dashboard.");
+        }
+      },
     },
 
+    // Patient routes
+    { path: "/dashboard", component: PatientDashboard },
+    { path: "/patient/portal/appointments", component: PatientAppointments },
+    { path: "/patient/portal/appointments/book", name: "book-appointment", component: BookAppointment },
+    { path: '/patient/portal/find-doctors', name: 'FindDoctors', component: FindDoctors },
+
     // Doctor & Admin portals
-    { path: "/admin/portal", component: AdminPortal },
-    { path: "/doctor/portal", component: DoctorPortal },
+    { path: "/admin/portal", component: AdminDashboard },
+    { path: "/doctor/portal", component: DoctorDashboard },
 
     // Catch all
     // { path: "/:pathMatch(.*)*", redirect: "/" },
   ],
 });
 
-// // ✅ Auth guard
+// // Auth guard
 // router.beforeEach(async (to) => {
-//   console.log("Navigating to:", to.fullPath); // 👀 add this
 //   const alertStore = useAlertStore();
 //   alertStore.clear();
 

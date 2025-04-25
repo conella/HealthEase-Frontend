@@ -71,14 +71,13 @@ async function onSubmit(values) {
 
     try {
         // Call login from Pinia store
-        const user = await authStore.login(username, password)
+        await authStore.login(username, password)
 
         // Show success message and redirect
-        console.log('Login successful:', user)
         router.push('/dashboard') // Redirect user based on role
     } catch (error) {
         console.error("Login failed:", error);
-        alertStore.error(error.message || "Invalid credentials"); // This is what your test expects
+        alertStore.error(error.message || "Invalid credentials");
     }
 }
 </script>
