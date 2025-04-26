@@ -36,7 +36,7 @@
                         </Form>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-center">
-                        <router-link to="register" class="v-btn v-btn--text">Don't have an account?
+                        <router-link to="/account/register" class="v-btn v-btn--text">Don't have an account?
                             Register</router-link>
                     </v-card-actions>
                 </v-card>
@@ -51,6 +51,9 @@ import { Form, Field } from 'vee-validate'
 import * as Yup from 'yup'
 import { useAuthStore } from '@/stores'
 import { router } from '@/router'
+import { useAlertStore } from "@/stores/alert.store.js";
+
+let alertStore = useAlertStore();
 
 // Validation schema
 const validationSchema = Yup.object().shape({
@@ -60,23 +63,21 @@ const validationSchema = Yup.object().shape({
 
 // Reactive state for error message
 const errorMessage = ref('')
+const authStore = useAuthStore()
 
 // Submit handler
 async function onSubmit(values) {
-    const authStore = useAuthStore()
     const { username, password } = values
 
     try {
         // Call login from Pinia store
-        const user = await authStore.login(username, password)
+        await authStore.login(username, password)
 
         // Show success message and redirect
-        console.log('Login successful:', user)
         router.push('/dashboard') // Redirect user based on role
     } catch (error) {
-        console.error("Login failed:", error)
-        // Update the error message when login fails
-        errorMessage.value = "Invalid credentials. Please check your username and password."
+        console.error("Login failed:", error);
+        alertStore.error(error.message || "Invalid credentials");
     }
 }
 </script>

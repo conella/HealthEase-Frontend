@@ -1,11 +1,11 @@
 <script setup>
 import { useAuthStore } from '@/stores';
-import { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router';
 
 const authStore = useAuthStore();
 const route = useRoute();
 
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue';
 
 const isRegisterPage = ref(false);
 const isLoginPage = ref(false);
@@ -40,10 +40,10 @@ watchEffect(() => {
 
         <!-- Patient Navbar -->
         <template v-else-if="authStore.user.role === 'patient'">
-            <v-btn text to="/patient/portal">Dashboard</v-btn>
-            <v-btn text to="/patient/appointments">Appointments</v-btn>
+            <v-btn text to="/dashboard">Dashboard</v-btn>
+            <v-btn text to="/patient/portal/appointments">Appointments</v-btn>
             <v-btn text to="/patient/history">Medical Records</v-btn>
-            <v-btn text to="/patient/search-doctor">Find a Doctor</v-btn>
+            <v-btn text to="/patient/portal/find-doctors">Find a Doctor</v-btn>
             <v-btn text @click="authStore.logout()">Logout</v-btn>
         </template>
 
