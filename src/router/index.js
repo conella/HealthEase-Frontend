@@ -72,7 +72,7 @@ router.beforeEach(async (to) => {
   const publicPages = ["/account/login", "/account/register"];
   const authRequired = !publicPages.some((path) => to.path.startsWith(path));
 
-  // ✅ Run checkAuth only once
+  // Run checkAuth only once
   if (!isAuthResolved) {
     await authStore.checkAuth();
     isAuthResolved = true;

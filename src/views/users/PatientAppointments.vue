@@ -83,7 +83,7 @@ const authStore = useAuthStore()
 //   store.fetchAppointments();
 // });
 
-// ✅ Wait for user to be available before fetching appointments
+// Wait for user to be available before fetching appointments
 watch(
   () => authStore.user,
   (user) => {
