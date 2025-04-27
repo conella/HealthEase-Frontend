@@ -130,7 +130,7 @@ describe("PatientDashboard", () => {
   });
 
   // Test case: Check if "No upcoming appointments" message is shown when no upcoming appointments are available
-  it('shows "No upcoming appointments" when there are no upcoming appointments', async () => {
+  it("shows \"No upcoming appointments\" when there are no upcoming appointments", async () => {
     appointmentsStore.appointments = [
       {
         id: 1,
@@ -186,7 +186,7 @@ describe("PatientDashboard", () => {
   });
 
   // Test case: Check if the "Book New Appointment" button exists
-  it('shows the "Book New Appointment" button', async () => {
+  it("shows the \"Book New Appointment\" button", async () => {
     const wrapper = mountComponent();
     await wrapper.vm.$nextTick();
 

@@ -19,13 +19,13 @@ export default defineConfig([
       vue: pluginVue,
     },
     rules: {
-      "no-unused-vars": "off",
       "vue/multi-word-component-names": [
         "error",
         {
           ignores: ["Alert", "Nav", "Home", "Layout", "Login", "Register", "default", "Settings", "Dashboard"],
         },
       ],
+      "quotes": ["error", "double"],
     },
   },
   pluginVue.configs["flat/essential"],

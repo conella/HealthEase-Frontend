@@ -1,19 +1,19 @@
 <script setup>
-import { useAuthStore } from '@/stores';
-import { useRoute } from 'vue-router';
+import { useAuthStore } from "@/stores";
+import { useRoute } from "vue-router";
 
 const authStore = useAuthStore();
 const route = useRoute();
 
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect } from "vue";
 
 const isRegisterPage = ref(false);
 const isLoginPage = ref(false);
 
 // Watch the route path and update flags
 watchEffect(() => {
-    isRegisterPage.value = route.path === '/account/register';
-    isLoginPage.value = route.path === '/account/login';
+    isRegisterPage.value = route.path === "/account/register";
+    isLoginPage.value = route.path === "/account/login";
 });
 
 </script>

@@ -70,12 +70,12 @@ describe("Register", () => {
     wrapper,
     { firstName, lastName, email, phoneNumber, username, password }
   ) => {
-    await wrapper.find('input[name="firstName"]').setValue(firstName);
-    await wrapper.find('input[name="lastName"]').setValue(lastName);
-    await wrapper.find('input[name="email"]').setValue(email);
-    await wrapper.find('input[name="phoneNumber"]').setValue(phoneNumber);
-    await wrapper.find('input[name="username"]').setValue(username);
-    await wrapper.find('input[name="password"]').setValue(password);
+    await wrapper.find("input[name=\"firstName\"]").setValue(firstName);
+    await wrapper.find("input[name=\"lastName\"]").setValue(lastName);
+    await wrapper.find("input[name=\"email\"]").setValue(email);
+    await wrapper.find("input[name=\"phoneNumber\"]").setValue(phoneNumber);
+    await wrapper.find("input[name=\"username\"]").setValue(username);
+    await wrapper.find("input[name=\"password\"]").setValue(password);
   };
 
   it("renders the registration form", async () => {

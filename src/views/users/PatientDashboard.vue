@@ -55,9 +55,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useAppointmentsStore } from '@/stores/appointments.store';
-import { useAuthStore } from '@/stores';
+import { ref, computed, onMounted } from "vue";
+import { useAppointmentsStore } from "@/stores/appointments.store";
+import { useAuthStore } from "@/stores";
 
 const store = useAppointmentsStore();
 const authStore = useAuthStore();
@@ -68,7 +68,7 @@ const totalAppointments = computed(() => store.appointments.length);
 const nextAppointment = computed(() => {
   if (store.appointments.length === 0) return null;
   const upcomingAppointments = store.appointments
-    .filter(app => new Date(app.appointmentdate) > new Date() && app.status !== 'canceled') // Exclude canceled appointments
+    .filter(app => new Date(app.appointmentdate) > new Date() && app.status !== "canceled") // Exclude canceled appointments
     .sort((a, b) => new Date(a.appointmentdate) - new Date(b.appointmentdate));
   return upcomingAppointments[0] || null;
 });
@@ -77,9 +77,9 @@ const nextAppointment = computed(() => {
 const statusCounts = computed(() => {
   return store.appointments.reduce(
     (counts, appointment) => {
-      if (appointment.status === 'booked') counts.booked++;
-      else if (appointment.status === 'canceled') counts.canceled++;
-      else if (appointment.status === 'rescheduled') counts.rescheduled++;
+      if (appointment.status === "booked") counts.booked++;
+      else if (appointment.status === "canceled") counts.canceled++;
+      else if (appointment.status === "rescheduled") counts.rescheduled++;
       return counts;
     },
     { booked: 0, canceled: 0, rescheduled: 0 }
@@ -101,7 +101,7 @@ function formatTime(timeStr) {
   if (timeStr && timeStr.length >= 5) {
     return timeStr.slice(0, 5); // Trims to HH:mm
   }
-  return 'Invalid Time'; // Fallback
+  return "Invalid Time"; // Fallback
 }
 </script>
 

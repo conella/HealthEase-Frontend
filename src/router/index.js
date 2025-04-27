@@ -20,7 +20,7 @@ export const router = createRouter({
     // Dashboard route
     {
       path: "/dashboard",
-      component: () => import('@/views/users/Dashboard.vue'), // Common parent component
+      component: () => import("@/views/users/Dashboard.vue"), // Common parent component
       beforeEnter: (to, from, next) => {
         const authStore = useAuthStore();
         if (authStore.user) {
@@ -36,7 +36,7 @@ export const router = createRouter({
     { path: "/dashboard", component: PatientDashboard },
     { path: "/patient/portal/appointments", component: PatientAppointments },
     { path: "/patient/portal/appointments/book", name: "book-appointment", component: BookAppointment },
-    { path: '/patient/portal/find-doctors', name: 'FindDoctors', component: FindDoctors },
+    { path: "/patient/portal/find-doctors", name: "FindDoctors", component: FindDoctors },
 
     // Doctor & Admin portals
     { path: "/admin/portal", component: AdminDashboard },
