@@ -68,7 +68,7 @@ const totalAppointments = computed(() => store.appointments.length);
 const nextAppointment = computed(() => {
   if (store.appointments.length === 0) return null;
   const upcomingAppointments = store.appointments
-    .filter(app => new Date(app.appointmentdate) > new Date())
+    .filter(app => new Date(app.appointmentdate) > new Date() && app.status !== 'canceled') // Exclude canceled appointments
     .sort((a, b) => new Date(a.appointmentdate) - new Date(b.appointmentdate));
   return upcomingAppointments[0] || null;
 });

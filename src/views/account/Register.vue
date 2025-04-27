@@ -26,6 +26,18 @@
                                     :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
                             </Field>
 
+                            <!-- Email -->
+                            <Field name="email" v-slot="{ field, errorMessage }">
+                                <v-text-field v-bind="field" label="Email"
+                                    :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
+                            </Field>
+
+                            <!-- Phone Number -->
+                            <Field name="phoneNumber" v-slot="{ field, errorMessage }">
+                                <v-text-field v-bind="field" label="Phone Number"
+                                    :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
+                            </Field>
+
                             <!-- Username -->
                             <Field name="username" v-slot="{ field, errorMessage }">
                                 <v-text-field v-bind="field" label="Username"
@@ -68,6 +80,8 @@ const schema = Yup.object().shape({
     password: Yup.string()
         .required('Password is required')
         .min(6, 'Password must be at least 6 characters'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    phoneNumber: Yup.string().required('Phone Number is required'),
 })
 
 async function onSubmit(values) {
