@@ -46,11 +46,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Form, Field } from 'vee-validate'
-import * as Yup from 'yup'
-import { useAuthStore } from '@/stores'
-import { router } from '@/router'
+import { ref } from "vue"
+import { Form, Field } from "vee-validate"
+import * as Yup from "yup"
+import { useAuthStore } from "@/stores"
+import { router } from "@/router"
 import { useAlertStore } from "@/stores/alert.store.js";
 
 let alertStore = useAlertStore();
@@ -62,7 +62,7 @@ const validationSchema = Yup.object().shape({
 })
 
 // Reactive state for error message
-const errorMessage = ref('')
+const errorMessage = ref("")
 const authStore = useAuthStore()
 
 // Submit handler
@@ -74,7 +74,7 @@ async function onSubmit(values) {
         await authStore.login(username, password)
 
         // Show success message and redirect
-        router.push('/dashboard') // Redirect user based on role
+        router.push("/dashboard") // Redirect user based on role
     } catch (error) {
         console.error("Login failed:", error);
         alertStore.error(error.message || "Invalid credentials");

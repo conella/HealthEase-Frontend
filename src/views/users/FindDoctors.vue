@@ -66,19 +66,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import api from '@/services/api';
+import { ref, onMounted, computed } from "vue";
+import api from "@/services/api";
 
 const doctors = ref([]);
 const loading = ref(true);
 const error = ref(null);
 const page = ref(1);
 const itemsPerPage = 5; // Adjust based on how many doctors you want to show per page
-const search = ref('');
+const search = ref("");
 
 const fetchDoctors = async () => {
     try {
-        const response = await api.get('/api/doctors/find-doctors');
+        const response = await api.get("/api/doctors/find-doctors");
         doctors.value = response.data;
     } catch (err) {
         error.value = err.response?.data?.message || err.message;

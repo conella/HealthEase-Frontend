@@ -68,12 +68,14 @@ describe("Register", () => {
 
   const fillForm = async (
     wrapper,
-    { firstName, lastName, username, password }
+    { firstName, lastName, email, phoneNumber, username, password }
   ) => {
-    await wrapper.find('input[name="firstName"]').setValue(firstName);
-    await wrapper.find('input[name="lastName"]').setValue(lastName);
-    await wrapper.find('input[name="username"]').setValue(username);
-    await wrapper.find('input[name="password"]').setValue(password);
+    await wrapper.find("input[name=\"firstName\"]").setValue(firstName);
+    await wrapper.find("input[name=\"lastName\"]").setValue(lastName);
+    await wrapper.find("input[name=\"email\"]").setValue(email);
+    await wrapper.find("input[name=\"phoneNumber\"]").setValue(phoneNumber);
+    await wrapper.find("input[name=\"username\"]").setValue(username);
+    await wrapper.find("input[name=\"password\"]").setValue(password);
   };
 
   it("renders the registration form", async () => {
@@ -97,6 +99,8 @@ describe("Register", () => {
     await fillForm(wrapper, {
       firstName: "John",
       lastName: "Doe",
+      email: "johndoe@gmail.com",
+      phoneNumber: "123456789",
       username: "johndoe",
       password: "password123",
     });
@@ -108,6 +112,8 @@ describe("Register", () => {
     expect(registerMock).toHaveBeenCalledWith({
       firstName: "John",
       lastName: "Doe",
+      email: "johndoe@gmail.com",
+      phoneNumber: "123456789",
       username: "johndoe",
       password: "password123",
     });
@@ -130,6 +136,8 @@ describe("Register", () => {
     await fillForm(wrapper, {
       firstName: "John",
       lastName: "Doe",
+      email: "johndoe@gmail.com",
+      phoneNumber: "123456789",
       username: "johndoe",
       password: "password123",
     });

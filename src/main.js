@@ -10,7 +10,7 @@ import * as directives from "vuetify/directives";
 
 import { router } from "./router";
 import { createPinia } from "pinia";
-import '@mdi/font/css/materialdesignicons.css'
+import "@mdi/font/css/materialdesignicons.css"
 
 const app = createApp(App);
 
@@ -19,7 +19,7 @@ const pinia = createPinia();
 app.use(pinia);
 
 // Auth store after Pinia is available
-import { useAuthStore } from '@/stores';
+import { useAuthStore } from "@/stores";
 const authStore = useAuthStore();
 
 // Set up Vuetify

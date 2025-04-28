@@ -26,6 +26,18 @@
                                     :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
                             </Field>
 
+                            <!-- Email -->
+                            <Field name="email" v-slot="{ field, errorMessage }">
+                                <v-text-field v-bind="field" label="Email"
+                                    :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
+                            </Field>
+
+                            <!-- Phone Number -->
+                            <Field name="phoneNumber" v-slot="{ field, errorMessage }">
+                                <v-text-field v-bind="field" label="Phone Number"
+                                    :error-messages="errorMessage ? [errorMessage] : []" outlined dense required />
+                            </Field>
+
                             <!-- Username -->
                             <Field name="username" v-slot="{ field, errorMessage }">
                                 <v-text-field v-bind="field" label="Username"
@@ -55,19 +67,21 @@
 </template>
 
 <script setup>
-import { Form, Field } from 'vee-validate'
-import * as Yup from 'yup'
+import { Form, Field } from "vee-validate"
+import * as Yup from "yup"
 
-import { useUsersStore, useAlertStore } from '@/stores'
-import { router } from '@/router'
+import { useUsersStore, useAlertStore } from "@/stores"
+import { router } from "@/router"
 
 const schema = Yup.object().shape({
-    firstName: Yup.string().required('First Name is required'),
-    lastName: Yup.string().required('Last Name is required'),
-    username: Yup.string().required('Username is required'),
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
+    username: Yup.string().required("Username is required"),
     password: Yup.string()
-        .required('Password is required')
-        .min(6, 'Password must be at least 6 characters'),
+        .required("Password is required")
+        .min(6, "Password must be at least 6 characters"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    phoneNumber: Yup.string().required("Phone Number is required"),
 })
 
 async function onSubmit(values) {
@@ -75,8 +89,8 @@ async function onSubmit(values) {
     const alertStore = useAlertStore()
     try {
         await usersStore.register(values)
-        await router.push('/account/login')
-        alertStore.success('Registration successful')
+        await router.push("/account/login")
+        alertStore.success("Registration successful")
     } catch (error) {
         alertStore.error(error)
     }
