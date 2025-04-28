@@ -44,23 +44,23 @@ export const router = createRouter({
     // Doctor routes
 
     {
-      path: '/dashboard',
-      name: 'doctor-dashboard',
+      path: "/dashboard",
+      name: "doctor-dashboard",
       component: DoctorDashboard
     },
     {
-      path: '/doctor/portal/appointments',
-      name: 'doctor-appointments',
+      path: "/doctor/portal/appointments",
+      name: "doctor-appointments",
       component: DoctorAppointments
     },
     {
-      path: '/doctor/portal/leaves',
-      name: 'doctor-leaves',
+      path: "/doctor/portal/leaves",
+      name: "doctor-leaves",
       component: DoctorLeaves
     },
     {
-      path: '/doctor/portal/availability',
-      name: 'doctor-availability',
+      path: "/doctor/portal/availability",
+      name: "doctor-availability",
       component: DoctorAvailability
     },
     // Admin routes
