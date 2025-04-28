@@ -22,7 +22,7 @@
   import { computed, onMounted } from "vue";
   import { useAuthStore } from "@/stores";
   import PatientDashboard from "@/views/users/PatientDashboard.vue";
-  import DoctorDashboard from "@/views/users/DoctorDashboard.vue";
+  import DoctorDashboard from "@/views/users/doctor/DoctorDashboard.vue";
   import AdminDashboard from "@/views/users/AdminDashboard.vue";
   import { router } from "@/router";
   

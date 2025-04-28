@@ -5,7 +5,10 @@ import { Home } from "@/views";
 import accountRoutes from "./account.routes";
 
 import PatientDashboard from "@/views/users/PatientDashboard.vue";
-import DoctorDashboard from "@/views/users/DoctorDashboard.vue";
+import DoctorDashboard from "@/views/users/doctor/DoctorDashboard.vue";
+import DoctorAppointments from "../views/users/doctor/DoctorAppointments.vue";
+import DoctorAvailability from "../views/users/doctor/DoctorAvailability.vue";
+import DoctorLeaves from "../views/users/doctor/DoctorLeaves.vue";
 import AdminDashboard from "@/views/users/AdminDashboard.vue";
 import PatientAppointments from "@/views/users/PatientAppointments.vue";
 import BookAppointment from "../views/users/BookAppointment.vue";
@@ -38,9 +41,30 @@ export const router = createRouter({
     { path: "/patient/portal/appointments/book", name: "book-appointment", component: BookAppointment },
     { path: "/patient/portal/find-doctors", name: "FindDoctors", component: FindDoctors },
 
-    // Doctor & Admin portals
+    // Doctor routes
+
+    {
+      path: '/dashboard',
+      name: 'doctor-dashboard',
+      component: DoctorDashboard
+    },
+    {
+      path: '/doctor/portal/appointments',
+      name: 'doctor-appointments',
+      component: DoctorAppointments
+    },
+    {
+      path: '/doctor/portal/leaves',
+      name: 'doctor-leaves',
+      component: DoctorLeaves
+    },
+    {
+      path: '/doctor/portal/availability',
+      name: 'doctor-availability',
+      component: DoctorAvailability
+    },
+    // Admin routes
     { path: "/admin/portal", component: AdminDashboard },
-    { path: "/doctor/portal", component: DoctorDashboard },
 
     // Catch all
     // { path: "/:pathMatch(.*)*", redirect: "/" },

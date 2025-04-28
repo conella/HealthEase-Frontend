@@ -126,7 +126,7 @@ describe("PatientDashboard", () => {
     const nextAppointmentCard = wrapper.findAll(".v-card-text").at(1); // The next appointment card should be at index 1
 
     // Check that the next appointment contains the correct date and time
-    expect(nextAppointmentCard.text()).toContain("5/10/2025 Time: 10:00");
+    expect(nextAppointmentCard.text()).toContain("5/10/2025Time: 10:00");
   });
 
   // Test case: Check if "No upcoming appointments" message is shown when no upcoming appointments are available

@@ -19,7 +19,7 @@
                             available.</v-alert>
                         <v-alert v-else type="info">Loading doctors...</v-alert>
 
-                        <v-text-field v-model="selectedDate" label="Select Date" type="date" />
+                        <v-text-field v-model="selectedDate" label="Select Date" type="date" :min="today" />
                         <v-text-field v-model="selectedTime" label="Select Time" type="time" />
                     </v-card-text>
                     <v-card-actions>
@@ -42,6 +42,8 @@ const selectedDate = ref("");
 const selectedTime = ref("");
 const doctors = ref([]); // doctors fetched from the backend
 const loading = ref(true); // To show a loading state
+
+const today = ref(new Date().toISOString().split("T")[0]);
 
 onMounted(() => {
     fetchDoctors();

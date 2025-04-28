@@ -8,21 +8,24 @@
         </p>
       </v-col>
 
+      <!-- Total Appointments -->
       <v-col cols="12" md="4" class="text-center mb-4">
-        <v-card class="d-flex flex-column align-center pa-4 fixed-card-size" elevation="2">
+        <v-card class="d-flex flex-column align-center pa-4 fixed-card-size" color="blue lighten-5" elevation="2">
           <v-card-title class="headline">Total Appointments</v-card-title>
-          <v-card-text class="display-2 font-weight-bold">{{ totalAppointments }}</v-card-text>
+          <v-card-text class="display-2 font-weight-bold text-black body-text">
+            {{ totalAppointments }}
+          </v-card-text>
         </v-card>
       </v-col>
 
       <!-- Next Appointment -->
       <v-col cols="12" md="4" class="text-center mb-4">
-        <v-card class="d-flex flex-column align-center pa-4 fixed-card-size" elevation="2">
+        <v-card class="d-flex flex-column align-center pa-4 fixed-card-size" color="green lighten-5" elevation="2">
           <v-card-title class="headline">Next Appointment</v-card-title>
-          <v-card-text>
+          <v-card-text class="text-black">
             <div v-if="nextAppointment">
-              <strong>{{ nextAppointment.doctorName }}</strong> {{ formatDate(nextAppointment.appointmentdate) }}
-              <br />
+              <strong>{{ nextAppointment.doctorName }}</strong><br />
+              {{ formatDate(nextAppointment.appointmentdate) }}<br />
               <strong>Time:</strong> {{ formatTime(nextAppointment.appointmenttime) }}
             </div>
             <div v-else>
@@ -34,9 +37,9 @@
 
       <!-- Appointment Status Overview -->
       <v-col cols="12" md="4" class="text-center mb-4">
-        <v-card class="d-flex flex-column align-center pa-4 fixed-card-size" elevation="2">
+        <v-card class="d-flex flex-column align-center pa-4 fixed-card-size" color="blue-grey lighten-5" elevation="2">
           <v-card-title class="headline">Appointment Status</v-card-title>
-          <v-card-text>
+          <v-card-text class="text-black">
             <div>
               <p><strong>Booked:</strong> {{ statusCounts.booked }}</p>
               <p><strong>Canceled:</strong> {{ statusCounts.canceled }}</p>
@@ -146,7 +149,6 @@ function formatTime(timeStr) {
 .v-card-text {
   font-size: 20px;
   font-weight: 700;
-  color: #2c3e50;
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
@@ -154,4 +156,11 @@ function formatTime(timeStr) {
   text-align: center; /* Center the text */
 }
 
+.text-black {
+  color: black;
+}
+
+.body-text {
+  font-size: 60px;
+}
 </style>

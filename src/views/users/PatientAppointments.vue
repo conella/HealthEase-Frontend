@@ -52,7 +52,7 @@
       <v-card>
         <v-card-title>Reschedule Appointment</v-card-title>
         <v-card-text>
-          <v-text-field v-model="newDate" label="New Date" type="date" />
+          <v-text-field v-model="newDate" label="New Date" type="date" :min="today" />
           <v-text-field v-model="newTime" label="New Time" type="time" />
         </v-card-text>
         <v-card-actions>
@@ -78,6 +78,8 @@ const newTime = ref("");
 // const appointments = store.appointments;
 const appointments = computed(() => store.appointments);
 const authStore = useAuthStore()
+
+const today = ref(new Date().toISOString().split("T")[0]);
 
 // onMounted(() => {
 //   store.fetchAppointments();
