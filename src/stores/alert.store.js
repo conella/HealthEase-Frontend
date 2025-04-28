@@ -1,15 +1,15 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useAlertStore = defineStore('alert', {
+export const useAlertStore = defineStore("alert", {
     state: () => ({
         alert: null
     }),
     actions: {
         success(message) {
-            this.alert = { message, type: 'alert-success' };
+            this.alert = { message, type: "alert-success" };
         },
         error(message) {
-            this.alert = { message, type: 'alert-danger' };
+            this.alert = { message, type: "alert-danger" };
         },
         clear() {
             this.alert = null;

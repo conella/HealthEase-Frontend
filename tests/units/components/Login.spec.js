@@ -67,8 +67,8 @@ describe("Login", () => {
   };
 
   const fillForm = async (wrapper, { username, password }) => {
-    await wrapper.find('input[name="username"]').setValue(username);
-    await wrapper.find('input[name="password"]').setValue(password);
+    await wrapper.find("input[name=\"username\"]").setValue(username);
+    await wrapper.find("input[name=\"password\"]").setValue(password);
   };
 
   it("renders the login form", async () => {

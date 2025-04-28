@@ -1,6 +1,6 @@
 <script setup>
-import { storeToRefs } from 'pinia';
-import { useAlertStore } from '@/stores';
+import { storeToRefs } from "pinia";
+import { useAlertStore } from "@/stores";
 
 const alertStore = useAlertStore();
 const { alert } = storeToRefs(alertStore);

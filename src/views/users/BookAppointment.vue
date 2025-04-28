@@ -34,7 +34,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useAppointmentsStore } from "@/stores/appointments.store";
-import api from '@/services/api';
+import api from "@/services/api";
 
 const store = useAppointmentsStore();
 const selectedDoctorId = ref(null); // Holds only the doctor ID
