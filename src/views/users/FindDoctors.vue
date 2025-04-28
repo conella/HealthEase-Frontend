@@ -50,7 +50,7 @@
                                     View Details
                                 </v-btn>
                                 <v-btn class="doctor-btn" size="x-small" color="success"
-                                    @click="viewDoctorDetails(doctor)">
+                                    @click="openAvailabilityDialog(doctor)">
                                     Availability
                                 </v-btn>
                             </td>
@@ -62,6 +62,33 @@
                 <v-pagination v-model:page="page" :length="Math.ceil(filteredDoctors.length / itemsPerPage)" circle />
             </v-col>
         </v-row>
+
+        <!-- Availability Dialog -->
+        <v-dialog v-model="availabilityDialog" max-width="600px">
+            <v-card>
+                <v-card-title class="headline">Doctor Availability</v-card-title>
+                <v-card-text>
+                    <div v-if="doctorAvailability && doctorAvailability.length > 0">
+                        <v-row>
+                            <v-col cols="12" sm="6" v-for="(availability, index) in doctorAvailability" :key="index">
+                                <v-card>
+                                    <v-card-title>{{ availability.dayofweek }}</v-card-title>
+                                    <v-card-subtitle>
+                                        {{ availability.starttime }} - {{ availability.endtime }}
+                                    </v-card-subtitle>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                    </div>
+                    <div v-else>
+                        <p>No availability information found for this doctor.</p>
+                    </div>
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn text @click="availabilityDialog = false">Close</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -69,17 +96,22 @@
 import { ref, onMounted, computed } from "vue";
 import api from "@/services/api";
 
+// Declare refs for doctors, loading state, error, etc.
 const doctors = ref([]);
 const loading = ref(true);
 const error = ref(null);
 const page = ref(1);
 const itemsPerPage = 5; // Adjust based on how many doctors you want to show per page
 const search = ref("");
+const availabilityDialog = ref(false);
+const doctorAvailability = ref([]);
 
+// Fetch doctors from the API
 const fetchDoctors = async () => {
     try {
         const response = await api.get("/api/doctors/find-doctors");
         doctors.value = response.data;
+        console.log(response.data)
     } catch (err) {
         error.value = err.response?.data?.message || err.message;
     } finally {
@@ -87,12 +119,26 @@ const fetchDoctors = async () => {
     }
 };
 
-// Fetch doctors when component is mounted
-onMounted(fetchDoctors);
+// Fetch doctor details (availability in this case)
+const fetchDoctorAvailability = async (doctorId) => {
+    try {
+        const response = await api.get(`/api/availability/availability/${doctorId}`);
+        doctorAvailability.value = response.data;
+    } catch (err) {
+        error.value = err.response?.data?.message || err.message;
+    }
+};
+
+// Open the availability dialog
+const openAvailabilityDialog = (doctor) => {
+    console.log(doctor)
+    fetchDoctorAvailability(doctor.doctorid);
+    availabilityDialog.value = true;
+};
 
 // Handle viewing doctor details
 const viewDoctorDetails = (doctor) => {
-    // TODO
+    // TODO: Implement functionality for viewing doctor details
 };
 
 // Computed property to filter doctors based on the search input
@@ -109,6 +155,9 @@ const filteredDoctors = computed(() => {
         );
     });
 });
+
+// Fetch doctors when component is mounted
+onMounted(fetchDoctors);
 </script>
 
 <style scoped>
