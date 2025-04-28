@@ -49,10 +49,10 @@ watchEffect(() => {
 
         <!-- Doctor Navbar -->
         <template v-else-if="authStore.user.role === 'doctor'">
-            <v-btn text to="/doctor/portal">Dashboard</v-btn>
-            <v-btn text to="/doctor/schedule">My Schedule</v-btn>
-            <v-btn text to="/doctor/appointments">Appointments</v-btn>
-            <v-btn text to="/doctor/patients">Patients</v-btn>
+            <v-btn text to="/dashboard">Dashboard</v-btn>
+            <v-btn text to="/doctor/portal/availability">My Schedule</v-btn>
+            <v-btn text to="/doctor/portal/appointments">Appointments</v-btn>
+            <v-btn text to="/doctor/portal/leaves">Leave Management</v-btn>
             <v-btn text @click="authStore.logout()">Logout</v-btn>
         </template>
 
