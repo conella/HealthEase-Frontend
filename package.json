@@ -22,7 +22,7 @@
   "homepage": "https://github.com/conella/HealthEase-Frontend#readme",
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "axios": "^1.8.4",
+    "axios": "^1.9.0",
     "flush-promises": "^1.0.2",
     "pinia": "^3.0.2",
     "sass": "^1.86.3",
